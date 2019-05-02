@@ -1,0 +1,35 @@
+{
+	"extends": [
+		"tslint:recommended",
+		"tslint-react"
+	],
+	"rules": {
+		"semicolon": [
+			true,
+			"never"
+		],
+		"quotemark": [
+			true,
+			"single",
+			"jsx-single"
+		],
+		"ordered-imports": false,
+		"interface-name": false,
+		"trailing-comma": false,
+		"object-literal-sort-keys": false,
+		"whitespace": [
+			true,
+			"check-module"
+		],
+		"indent": [
+			true,
+			"tabs"
+		],
+		"no-empty": [
+			true,
+			"allow-empty-catch",
+			"allow-empty-functions"
+		],
+		"jsx-no-multiline-js": false
+	}
+}

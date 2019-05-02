@@ -1,0 +1,29 @@
+{
+	"name": "theme-up",
+	"version": "0.1.0",
+	"description": "🎨 Easy and persistent theming using the React Context API & CSS variables",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"build": "tsc",
+		"lint": "tslint -c tslint.json 'src/**/*.ts{,x}'"
+	},
+	"keywords": [
+		"css variables",
+		"theme",
+		"theming"
+	],
+	"author": "Mike Duister",
+	"license": "MIT",
+	"dependencies": {
+		"react": "^16.8.6",
+		"styled-components": "^4.2.0"
+	},
+	"devDependencies": {
+		"@types/react": "^16.8.15",
+		"@types/styled-components": "^4.1.14",
+		"tslint": "^5.16.0",
+		"tslint-react": "^4.0.0",
+		"typescript": "^3.4.5"
+	}
+}
