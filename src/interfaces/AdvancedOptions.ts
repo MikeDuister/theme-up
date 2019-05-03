@@ -1,3 +1,6 @@
 export interface AdvancedOptions<T> {
-	themeInitializerInterceptor?: () => T | undefined | null
+	initInterceptor?: (theme: T) => T
+	onUpdate?: (theme: T) => void
+	isPersistent?: boolean
+	storageKey?: string
 }
