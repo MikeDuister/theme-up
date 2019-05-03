@@ -1,6 +1,6 @@
 {
 	"name": "theme-up",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "🎨 Easy and persistent theming using the React Context API & CSS variables",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
