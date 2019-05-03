@@ -15,5 +15,10 @@ export function getDefaultTheme<T extends string | number>(config: Config<T>): T
 	}
 
 	theme = theme || config.defaultTheme
+
+	if (config.initInterceptor) {
+		theme = config.initInterceptor(theme)
+	}
+
 	return theme
 }
