@@ -1,19 +1,28 @@
-import React, { Component, Context } from 'react'
+import React, { Component } from 'react'
 import { createGlobalStyle } from 'styled-components'
-import { Config, ContextLayout } from './interfaces'
+import { constants } from './constants'
+import { Config } from './interfaces'
 import { getDefaultTheme, getThemes } from './helpers'
+import { ThemeContext } from './'
 
 interface Props<T extends string | number> {
 	config: Config<T>
-	themeContext: Context<ContextLayout<T>>
 }
 
-export class GlobalThemeProvider<T extends string | number> extends Component<Props<T>, {theme: T}> {
+interface State<T extends string | number> {
+	theme: T
+}
+
+export class GlobalThemeProvider<T extends string | number> extends Component<Props<T>, State<T>> {
+	public static defaultProps: {config: {[P in keyof Config<any>]?: Config<any>[P] }} = {
+		config: {
+			isPersistent: true
+		}
+	}
 	public readonly state: { theme: T } = {
 		theme: getDefaultTheme<T>(this.props.config)
 	}
-
-	public GlobalStyle = createGlobalStyle<{theme: T}>`
+	public GlobalStyle = createGlobalStyle<{ theme: T }>`
 		:root {
 		  ${(props) => getThemes<T>(this.props.config, props.theme)}
 		}
@@ -24,7 +33,7 @@ export class GlobalThemeProvider<T extends string | number> extends Component<Pr
 		const {children} = this.props
 
 		return (
-			<this.props.themeContext.Provider
+			<ThemeContext.Provider
 				value={{
 					theme,
 					updateTheme: this.changeTheme
@@ -32,12 +41,19 @@ export class GlobalThemeProvider<T extends string | number> extends Component<Pr
 			>
 				<this.GlobalStyle theme={theme}/>
 				{children}
-			</this.props.themeContext.Provider>
+			</ThemeContext.Provider>
 		)
 	}
 
-	private changeTheme(theme: T) {
-		localStorage.setItem('theme-up', JSON.stringify(theme))
+	private changeTheme = (theme: T) => {
+		const {config} = this.props
+		if (config.isPersistent) {
+			const storageKey = this.props.config.storageKey || constants.defaultStorageKey
+			localStorage.setItem(storageKey, JSON.stringify(theme))
+		}
+		if (config.onUpdate) {
+			config.onUpdate(theme)
+		}
 		this.setState({theme})
 	}
 }
