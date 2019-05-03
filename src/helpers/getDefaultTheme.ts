@@ -1,3 +1,4 @@
+import { constants } from '../constants'
 import { Config } from '../interfaces'
 
 export function getDefaultTheme<T extends string | number>(config: Config<T>): T {
@@ -6,11 +7,13 @@ export function getDefaultTheme<T extends string | number>(config: Config<T>): T
 		return config.defaultTheme
 	}
 
-	let userTheme: T = localStorage.getItem('theme-up') as T
+	const storageKey = config.storageKey || constants.defaultStorageKey
+	let theme: T = localStorage.getItem(storageKey) as T
 
-	if (window.matchMedia('(prefers-color-scheme: dark)').matches && !userTheme) {
-		userTheme = config.defaultThemeDark
+	if (window.matchMedia('(prefers-color-scheme: dark)').matches && !theme) {
+		theme = config.defaultThemeDark
 	}
 
-	return userTheme || config.defaultTheme
+	theme = theme || config.defaultTheme
+	return theme
 }
