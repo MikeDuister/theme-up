@@ -14,11 +14,6 @@ interface State<T extends string | number> {
 }
 
 export class GlobalThemeProvider<T extends string | number> extends Component<Props<T>, State<T>> {
-	public static defaultProps: {config: {[P in keyof Config<any>]?: Config<any>[P] }} = {
-		config: {
-			isPersistent: true
-		}
-	}
 	public readonly state: { theme: T } = {
 		theme: getDefaultTheme<T>(this.props.config)
 	}
@@ -27,6 +22,11 @@ export class GlobalThemeProvider<T extends string | number> extends Component<Pr
 		  ${(props) => getThemes<T>(this.props.config, props.theme)}
 		}
 	`
+	private defaultProps: {config: {[P in keyof Config<T>]?: Config<T>[P] }} = {
+		config: {
+			isPersistent: true
+		}
+	}
 
 	public render() {
 		const {theme} = this.state
