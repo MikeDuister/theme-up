@@ -17,7 +17,7 @@ A minimalistic library that allows you to easily add theme support to your React
 ```bash
 npm install theme-up
 ```
-2. Make an object of type `Config` (more details in ....................)
+2. Make an object of type `Config` (more details in section "Config object")
 ```TypeScript
 import { Config } from 'theme-up'
 

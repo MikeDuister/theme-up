@@ -7,11 +7,11 @@ export function getThemes<T extends string | number>(config: Config<T>, theme: T
 
 	for (const themeKey of Object.keys(config.themes)) {
 		themes = css`
-				${themes}
-				${theme === themeKey && css`
-				  ${getStyles(config.themes[themeKey as T] as Styles)}
-				`}
-			`
+			${themes}
+			${theme === themeKey && css`
+				${getStyles(config.themes[themeKey as T] as Styles)}
+			`}
+		`
 	}
 
 	return themes
