@@ -7,14 +7,18 @@ export function getDefaultTheme<T extends string | number>(config: Config<T>): T
 		return config.defaultTheme
 	}
 
-	const storageKey = config.storageKey || constants.defaultStorageKey
-	let theme: T = localStorage.getItem(storageKey) as T
+	let theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+		? config.defaultThemeDark
+		: config.defaultTheme
 
-	if (window.matchMedia('(prefers-color-scheme: dark)').matches && !theme) {
-		theme = config.defaultThemeDark
+	if (config.isPersistent !== false) {
+		const storageKey = config.storageKey || constants.defaultStorageKey
+		const storedTheme = localStorage.getItem(storageKey)
+
+		if (storedTheme) {
+			theme = JSON.parse(storedTheme) as T
+		}
 	}
-
-	theme = theme || config.defaultTheme
 
 	if (config.initInterceptor) {
 		theme = config.initInterceptor(theme)
