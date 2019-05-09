@@ -1,6 +1,7 @@
 <a href="https://www.npmjs.com/package/theme-up">
 	<img alt="npm" src="https://img.shields.io/npm/dw/theme-up.svg">
 </a>
+<img alt="'Works on my machine' badge" src="https://img.shields.io/static/v1.svg?label=works%20on%20my%20machine&message=%C2%AF\_(%E3%83%84)_/%C2%AF&color=yellow">
 <br />
 <br />
 
