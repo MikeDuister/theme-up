@@ -22,12 +22,6 @@ export class GlobalThemeProvider<T extends string | number> extends Component<Pr
 		  ${(props) => getThemes<T>(this.props.config, props.theme)}
 		}
 	`
-	private defaultProps: {config: {[P in keyof Config<T>]?: Config<T>[P] }} = {
-		config: {
-			isPersistent: true
-		}
-	}
-
 	public render() {
 		const {theme} = this.state
 		const {children} = this.props
@@ -47,7 +41,7 @@ export class GlobalThemeProvider<T extends string | number> extends Component<Pr
 
 	private changeTheme = (theme: T) => {
 		const {config} = this.props
-		if (config.isPersistent) {
+		if (config.isPersistent !== false) {
 			const storageKey = this.props.config.storageKey || constants.defaultStorageKey
 			localStorage.setItem(storageKey, JSON.stringify(theme))
 		}
