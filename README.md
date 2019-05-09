@@ -65,10 +65,10 @@ When you're using typescript you should pass your theme identifier as a type. Th
 | --- | --- | --- | --- |
 | `defaultTheme: T` | generic<sup>*</sup> | required | The default theme. This value must be an object within `themes`. |
 | `defaultThemeDark: T` | generic<sup>*</sup> | required | The default theme if the browser specifies a user preference (safari macOS). This value must be an object within `themes`. |
-| `themes: { [key in T]?: Styles }` | required | Object, with key as defined in generics | An object containing all themes, every object's key will be used as identifier for that theme. The objects belonging to a theme are key-value pairs defining the variable name and value respectively. The variable names can be written with and without the `--` prefix. |
+| `themes: { [key in T]?: Styles }` | Object, with key as defined in generics | required | An object containing all themes, every object's key will be used as identifier for that theme. The objects belonging to a theme are key-value pairs defining the variable name and value respectively. The variable names can be written with and without the `--` prefix. |
 | `initInterceptor?: (theme: T) => T` | function | optional | Gives you the ability to do something when the theme is initiated (on load). This functions expects a return value of a theme (identifier). |
 | `onUpdate?: (theme: T) => void` | function | optional | A function that gets called on every theme change. |
-| `isPersistent?: boolean` | boolean | optional | A boolean that decides wether or not the value should be stored and retreived from `localStorage` |
+| `isPersistent?: boolean` | boolean | optional | A boolean that decides whether or not the value should be stored and retrieved from `localStorage` |
 
 
 <sup>* an extension of string | number</sup>
